@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Il nostro matrimonio 💍</title>
+
+  <style>
+    :root{
+      --bg1:#fff7f3;
+      --bg2:#fde9f0;
+      --ink:#2b2b2b;
+      --muted:#6b6b6b;
+      --card:#ffffffcc;
+      --stroke:#00000014;
+      --accent:#d06aa6;
+      --accent2:#caa85a;
+      --shadow: 0 20px 60px rgba(0,0,0,.10);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(1200px 700px at 10% 10%, var(--bg2), transparent 60%),
+        radial-gradient(1000px 600px at 90% 20%, #fff1d9, transparent 55%),
+        radial-gradient(900px 700px at 50% 100%, #e9f5ff, transparent 60%),
+        linear-gradient(180deg, var(--bg1), #fff);
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      width:min(980px, 92vw);
+      padding: 48px 0;
+    }
+
+    header{
+      text-align:center;
+      margin-bottom: 28px;
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:.5rem;
+      align-items:center;
+      padding: 8px 14px;
+      border: 1px solid var(--stroke);
+      background: #ffffffaa;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.06);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    h1{
+      margin: 18px 0 10px;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .sub{
+      margin: 0 auto;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .card{
+      margin: 28px auto 0;
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      backdrop-filter: blur(8px);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .countdown{
+      border-radius: 20px;
+      border: 1px solid var(--stroke);
+      background: #fff;
+      padding: 22px;
+    }
+
+    .count-title{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .count-title h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: .02em;
+    }
+
+    .status{
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .time{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin: 14px 0 10px;
+    }
+
+    .unit{
+      flex: 1 1 120px;
+      min-width: 120px;
+      border-radius: 18px;
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, #fff, #fff7fb);
+      padding: 16px 14px;
+      text-align:center;
+    }
+
+    .num{
+      font-variant-numeric: tabular-nums;
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .lbl{
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .14em;
+    }
+
+    .note{
+      text-align:center;
+      color: var(--muted);
+      font-size: 14px;
+      margin: 10px 0 0;
+      line-height: 1.5;
+    }
+
+    .details{
+      border-radius: 20px;
+      border: 1px solid var(--stroke);
+      background: #fff;
+      padding: 22px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+
+    .pill{
+      display:flex;
+      align-items:flex-start;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--stroke);
+      background: #ffffff;
+    }
+
+    .icon{
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      background: #fff3f8;
+      border: 1px solid #00000010;
+      font-size: 18px;
+    }
+
+    .pill h3{
+      margin: 0 0 4px;
+      font-size: 15px;
+    }
+
+    .pill p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top: 18px;
+    }
+
+    button{
+      appearance:none;
+      border: 1px solid var(--stroke);
+      background: #fff;
+      color: var(--ink);
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      cursor:pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,.06);
+      transition: transform .08s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    button:hover{
+      transform: translateY(-1px);
+      border-color: #00000025;
+      box-shadow: 0 14px 32px rgba(0,0,0,.09);
+    }
+
+    .primary{
+      border-color: #00000012;
+      background: linear-gradient(180deg, #ffe7f3, #fff);
+    }
+
+    .done{
+      outline: 2px solid rgba(208,106,166,.35);
+      box-shadow: 0 18px 45px rgba(208,106,166,.18);
+    }
+
+    footer{
+      text-align:center;
+      color: var(--muted);
+      margin-top: 18px;
+      font-size: 13px;
+    }
+
+    /* piccoli cuoricini di sfondo */
+    .hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.25;
+      overflow:hidden;
+    }
+    .heart{
+      position:absolute;
+      font-size: 18px;
+      animation: floatUp 10s linear infinite;
+      filter: blur(.2px);
+    }
+    @keyframes floatUp{
+      from{ transform: translateY(40vh) translateX(0) rotate(0deg); opacity:0; }
+      10%{ opacity:1; }
+      to{ transform: translateY(-120vh) translateX(40px) rotate(25deg); opacity:0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hearts" aria-hidden="true" id="hearts"></div>
+
+  <main class="wrap">
+    <header>
+      <div class="kicker">💐 Save the date • Countdown</div>
+      <h1>Tizio &amp; ✨</h1>
+      <p class="sub">
+        Manca poco al “sì”! Questa pagina è una demo stile matrimonio con un countdown di <strong>1 ora</strong>.
+        Puoi anche resettarlo o metterlo in pausa.
+      </p>
+    </header>
+
+    <section class="card">
+      <div class="grid">
+        <div class="countdown" id="countdownCard">
+          <div class="count-title">
+            <h2>Inizia tra</h2>
+            <div class="status" id="status">In corso…</div>
+          </div>
+
+          <div class="time" aria-live="polite">
+            <div class="unit">
+              <div class="num" id="hh">01</div>
+              <div class="lbl">ORE</div>
+            </div>
+            <div class="unit">
+              <div class="num" id="mm">00</div>
+              <div class="lbl">MIN</div>
+            </div>
+            <div class="unit">
+              <div class="num" id="ss">00</div>
+              <div class="lbl">SEC</div>
+            </div>
+          </div>
+
+          <p class="note" id="note">
+            Suggerimento: questo countdown è “relativo” (1 ora da quando apri la pagina).
+            Se vuoi una data precisa (tipo 21/06/2026 15:30) trovi il punto da cambiare nel JS.
+          </p>
+
+          <div class="actions">
+            <button class="primary" id="toggle">Pausa</button>
+            <button id="reset">Reset 1 ora</button>
+            <button id="setDate">Esempio: data fissa</button>
+          </div>
+        </div>
+
+        <aside class="details">
+          <div class="pill">
+            <div class="icon">📍</div>
+            <div>
+              <h3>Location</h3>
+              <p>Villa delle Rose, Verona (demo)</p>
+            </div>
+          </div>
+          <div class="pill">
+            <div class="icon">🕒</div>
+            <div>
+              <h3>Orario</h3>
+              <p>Cerimonia alle 15:30 • Aperitivo &amp; festa a seguire</p>
+            </div>
+          </div>
+          <div class="pill">
+            <div class="icon">💌</div>
+            <div>
+              <h3>RSVP</h3>
+              <p>Scrivi a: <em>rsvp@example.com</em> (demo)</p>
+            </div>
+          </div>
+          <div class="pill">
+            <div class="icon">🎁</div>
+            <div>
+              <h3>Regalo</h3>
+              <p>La tua presenza è il regalo più bello (demo)</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      Fatto con HTML/CSS/JS • Apri <strong>index.html</strong> nel browser.
+    </footer>
+  </main>
+
+  <script>
+    // ====== CONFIG ======
+    // Countdown di 1 ora (relativo all'apertura pagina)
+    const ONE_HOUR_MS = 60 * 60 * 1000;
+
+    // Se vuoi un countdown verso una DATA FISSA, usa questa variabile (vedi bottone "Esempio: data fissa")
+    // Esempio formato: new Date("2026-06-21T15:30:00")
+    let targetDate = null; // null = countdown relativo
+
+    // ====== STATE ======
+    let endTime = Date.now() + ONE_HOUR_MS;
+    let timer = null;
+    let paused = false;
+    let remainingWhenPaused = 0;
+
+    // ====== UI ======
+    const elHH = document.getElementById("hh");
+    const elMM = document.getElementById("mm");
+    const elSS = document.getElementById("ss");
+    const statusEl = document.getElementById("status");
+    const noteEl = document.getElementById("note");
+    const toggleBtn = document.getElementById("toggle");
+    const resetBtn = document.getElementById("reset");
+    const setDateBtn = document.getElementById("setDate");
+    const card = document.getElementById("countdownCard");
+
+    function pad2(n){ return String(n).padStart(2, "0"); }
+
+    function getRemainingMs(){
+      if (paused) return remainingWhenPaused;
+
+      if (targetDate instanceof Date){
+        return targetDate.getTime() - Date.now();
+      }
+      return endTime - Date.now();
+    }
+
+    function render(ms){
+      const clamped = Math.max(0, ms);
+      const totalSeconds = Math.floor(clamped / 1000);
+
+      const hh = Math.floor(totalSeconds / 3600);
+      const mm = Math.floor((totalSeconds % 3600) / 60);
+      const ss = totalSeconds % 60;
+
+      elHH.textContent = pad2(hh);
+      elMM.textContent = pad2(mm);
+      elSS.textContent = pad2(ss);
+
+      if (clamped <= 0){
+        statusEl.textContent = "È il momento! 💍";
+        card.classList.add("done");
+        toggleBtn.disabled = true;
+        toggleBtn.textContent = "Finito";
+        clearInterval(timer);
+        timer = null;
+      } else {
+        statusEl.textContent = paused ? "In pausa" : "In corso…";
+        card.classList.remove("done");
+      }
+    }
+
+    function tick(){
+      const ms = getRemainingMs();
+      render(ms);
+    }
+
+    function start(){
+      if (timer) clearInterval(timer);
+      tick();
+      timer = setInterval(tick, 250);
+    }
+
+    // ====== ACTIONS ======
+    toggleBtn.addEventListener("click", () => {
+      if (!paused){
+        paused = true;
+        remainingWhenPaused = getRemainingMs();
+        toggleBtn.textContent = "Riprendi";
+        statusEl.textContent = "In pausa";
+      } else {
+        paused = false;
+
+        // Riparte da dove era rimasto
+        if (targetDate instanceof Date){
+          targetDate = new Date(Date.now() + remainingWhenPaused);
+        } else {
+          endTime = Date.now() + remainingWhenPaused;
+        }
+
+        toggleBtn.textContent = "Pausa";
+        statusEl.textContent = "In corso…";
+      }
+      start();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      paused = false;
+      toggleBtn.disabled = false;
+      toggleBtn.textContent = "Pausa";
+      targetDate = null;
+      endTime = Date.now() + ONE_HOUR_MS;
+      noteEl.innerHTML = 'Suggerimento: questo countdown è “relativo” (1 ora da quando apri la pagina). ' +
+        'Se vuoi una data precisa (tipo 21/06/2026 15:30) trovi il punto da cambiare nel JS.';
+      start();
+    });
+
+    setDateBtn.addEventListener("click", () => {
+      // ESEMPIO: imposta una data fissa a 1 ora da adesso (solo per demo).
+      // Per una data reale: targetDate = new Date("2026-06-21T15:30:00");
+      paused = false;
+      toggleBtn.disabled = false;
+      toggleBtn.textContent = "Pausa";
+      targetDate = new Date(Date.now() + ONE_HOUR_MS);
+      noteEl.innerHTML = 'Ora il countdown è verso una <strong>data fissa</strong> (impostata a 1 ora da adesso). ' +
+        'Nel codice puoi sostituirla con la data reale del matrimonio.';
+      start();
+    });
+
+    // ====== BACKGROUND HEARTS ======
+    const hearts = document.getElementById("hearts");
+    const heartChars = ["♡","♥","❥","❦","❣"];
+    for (let i = 0; i < 20; i++){
+      const s = document.createElement("div");
+      s.className = "heart";
+      s.textContent = heartChars[Math.floor(Math.random()*heartChars.length)];
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.top = (40 + Math.random() * 80) + "vh";
+      s.style.animationDuration = (8 + Math.random() * 8) + "s";
+      s.style.animationDelay = (-Math.random() * 10) + "s";
+      hearts.appendChild(s);
+    }
+
+    // ====== INIT ======
+    start();
+  </script>
+</body>
+</html>
